@@ -580,6 +580,7 @@ Layout.prototype.initializeUmapInputs = function() {
   var nNeighborsOptions = this.getNNeighborsOptions();
   var minDistOptions = this.getMinDistOptions();
   this.elems.nNeighborsInput.setAttribute('max', nNeighborsOptions.length-1);
+  this.elems.nNeighborsInput.setAttribute('value', 0);
   this.elems.minDistInput.setAttribute('max', minDistOptions.length-1);
   this.elems.nNeighborsInput.addEventListener('change', function() {
     this.set('umap', true);
