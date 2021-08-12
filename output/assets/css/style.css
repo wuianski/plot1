@@ -252,7 +252,7 @@ select:disabled {
   transition: opacity 0.5s;
   text-align: right;
   white-space: nowrap;
-  vertical-align: top;
+  /*vertical-align: top;*/
   position: absolute;
   top: 0;
   right: 0;
@@ -984,6 +984,7 @@ nav h2 {
 .loader-icon {
   width: 70px;
   height: 70px;
+  display:none;
 }
 
 .block {
@@ -1066,8 +1067,8 @@ nav h2 {
 
 button {
   border: none;
-  background: #eab755;
-  padding: 10px 40px;
+  background: #fff;
+  padding: 10px 30px;
   display: block;
   margin: 0 auto;
   font-size: 14px;
@@ -1192,7 +1193,7 @@ noscript {
 
 #selected-image-modal {
   position: absolute;
-  top: 48px;
+  top: 0px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -1263,7 +1264,8 @@ noscript {
 **/
 
 .icons {
-  display: inline-block;
+  /*display: inline-block;*/
+  display:none;
   width: 40px;
   position: absolute;
   bottom: 25px;
