@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
 }
 
 body,
@@ -162,12 +162,12 @@ select:disabled {
   -moz-transform: translateZ(10px);
   -o-transform: translateZ(10px);
   transform: translateZ(10px);
-  display:none;
+  /*display: none;*/
 }
 
 #header,
 #logo {
-  background: #333333;
+  background: none;
   position: relative;
   z-index: 4;
 }
@@ -176,8 +176,8 @@ select:disabled {
   height: 48px;
   width: 100%;
   top: 0px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-  border-bottom: 1px solid #1f1f1f;
+  /*box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  border-bottom: 1px solid #1f1f1f;*/
   font-size: 0;
 }
 
@@ -206,7 +206,7 @@ select:disabled {
   padding: 11px 34px;
   box-sizing: border-box;
   font-weight: 300;
-  background: #444;
+  background: none;
   color: #fff;
   font-size: 21px;
   letter-spacing: 0.1em;
@@ -219,7 +219,7 @@ select:disabled {
   font-size: 16px;
   padding: 20px 25px;
   font-weight: 400;
-  letter-spacing: .025em;
+  letter-spacing: 0.025em;
   display: inline-block;
   vertical-align: top;
   height: 100%;
@@ -230,7 +230,7 @@ select:disabled {
   display: none;
 }
 
-@media(max-width: 335px) {
+@media (max-width: 335px) {
   #header #logo {
     display: none;
   }
@@ -362,7 +362,7 @@ select:disabled {
 }
 
 .filter-label::after {
-  content: '▾';
+  content: "▾";
   font-size: 10px;
   position: absolute;
   right: 0;
@@ -395,7 +395,7 @@ select:disabled {
 * Range slider
 **/
 
-input[type=range] {
+input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: 100px;
@@ -406,7 +406,7 @@ input[type=range] {
   vertical-align: top;
 }
 
-input[type=range]::-webkit-slider-thumb {
+input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 10px;
@@ -416,7 +416,7 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 10px;
 }
 
-input[type=range]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 10px;
@@ -426,7 +426,7 @@ input[type=range]::-moz-range-thumb {
   border-radius: 10px;
 }
 
-input[type=range]::-ms-thumb {
+input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 10px;
@@ -436,7 +436,7 @@ input[type=range]::-ms-thumb {
   border-radius: 10px;
 }
 
-#header-controls-bottom input[type=range] {
+#header-controls-bottom input[type="range"] {
   margin-top: 19px;
 }
 
@@ -535,6 +535,7 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
   vertical-align: top;
   padding: 5px;
+  display: none;
 }
 
 #icons img:hover {
@@ -629,7 +630,7 @@ nav {
   -moz-transform: translateZ(0px);
   -o-transform: translateZ(0px);
   transform: translateZ(0px);
-  display:none;
+  display: none;
 }
 
 #nav-inner {
@@ -843,7 +844,7 @@ nav h2 {
 }
 
 #new-hotspot::after {
-  content: '+';
+  content: "+";
 }
 
 #new-hotspot div {
@@ -868,32 +869,46 @@ nav h2 {
   background-position: 0 0, 0 100%, 0 0, 100% 0;
   background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
   -webkit-animation: marching-ants 3s;
-          animation: marching-ants 3s;
+  animation: marching-ants 3s;
   -webkit-animation-timing-function: linear;
-          animation-timing-function: linear;
+  animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
   -webkit-animation-play-state: running;
-          animation-play-state: running;
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #e5e5e5), color-stop(50%, #222)),
-                    -webkit-gradient(linear, left top, right top, color-stop(50%, #e5e5e5), color-stop(50%, #222)),
-                    -webkit-gradient(linear, left top, left bottom, color-stop(50%, #e5e5e5), color-stop(50%, #222)),
-                    -webkit-gradient(linear, left top, left bottom, color-stop(50%, #e5e5e5), color-stop(50%, #222));
+  animation-play-state: running;
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(50%, #e5e5e5),
+      color-stop(50%, #222)
+    ),
+    -webkit-gradient(linear, left top, right top, color-stop(50%, #e5e5e5), color-stop(50%, #222)),
+    -webkit-gradient(linear, left top, left bottom, color-stop(50%, #e5e5e5), color-stop(50%, #222)),
+    -webkit-gradient(linear, left top, left bottom, color-stop(50%, #e5e5e5), color-stop(50%, #222));
   background-image: linear-gradient(to right, #e5e5e5 50%, #222 50%),
-                    linear-gradient(to right, #e5e5e5 50%, #222 50%),
-                    linear-gradient(to bottom, #e5e5e5 50%, #222 50%),
-                    linear-gradient(to bottom, #e5e5e5 50%, #222 50%);
+    linear-gradient(to right, #e5e5e5 50%, #222 50%),
+    linear-gradient(to bottom, #e5e5e5 50%, #222 50%),
+    linear-gradient(to bottom, #e5e5e5 50%, #222 50%);
   color: #fff;
 }
 
 @-webkit-keyframes marching-ants {
-  0% { background-position: 0 0,  0 100%,  0 0,  100% 0; }
-  100% { background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; }
+  0% {
+    background-position: 0 0, 0 100%, 0 0, 100% 0;
+  }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px;
+  }
 }
 
 @keyframes marching-ants {
-  0% { background-position: 0 0,  0 100%,  0 0,  100% 0; }
-  100% { background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px; }
+  0% {
+    background-position: 0 0, 0 100%, 0 0, 100% 0;
+  }
+  100% {
+    background-position: 40px 0, -40px 100%, 0 -40px, 100% 40px;
+  }
 }
 
 /**
@@ -939,10 +954,10 @@ nav h2 {
   flex-direction: column;
   justify-content: center;
   z-index: 3;
-  -webkit-transform:translateZ(3px);
-  -moz-transform:translateZ(3px);
-  -o-transform:translateZ(3px);
-  transform:translateZ(3px);
+  -webkit-transform: translateZ(3px);
+  -moz-transform: translateZ(3px);
+  -o-transform: translateZ(3px);
+  transform: translateZ(3px);
 }
 
 #loader-scene.hidden {
@@ -970,7 +985,6 @@ nav h2 {
   }
 }
 
-
 /**
 * Loader icon
 **/
@@ -984,7 +998,7 @@ nav h2 {
 .loader-icon {
   width: 70px;
   height: 70px;
-  display:none;
+  display: none;
 }
 
 .block {
@@ -1073,7 +1087,7 @@ button {
   margin: 0 auto;
   font-size: 14px;
   font-weight: 600;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
   cursor: pointer;
   min-height: 39px; /* Fix Safari bug */
 }
@@ -1265,7 +1279,7 @@ noscript {
 
 .icons {
   /*display: inline-block;*/
-  display:none;
+  display: none;
   width: 40px;
   position: absolute;
   bottom: 25px;
@@ -1422,12 +1436,12 @@ noscript {
 }
 
 #selection-icons img.active {
-  opacity: 1.0;
+  opacity: 1;
 }
 
 #selection-icons img:hover {
   background: #eab755;
-  opacity: 1.0;
+  opacity: 1;
 }
 
 /**
@@ -1458,7 +1472,7 @@ noscript {
 }
 
 .dismissible-tooltip::before {
-  content: '';
+  content: "";
   width: 10px;
   height: 10px;
   transform: rotate(45deg);
@@ -1494,18 +1508,18 @@ noscript {
 
 .dismissible-tooltip button {
   display: inline-block;
-  border: 1px solid #F2C54A;
+  border: 1px solid #f2c54a;
   padding: 3px 20px;
   margin-top: 4px;
   border-radius: 3px;
-  color: #F2C54A;
+  color: #f2c54a;
   font-weight: 800;
   cursor: pointer;
   background: transparent;
 }
 
 .dismissible-tooltip button:hover {
-  background: #F2C54A;
+  background: #f2c54a;
   color: #222;
 }
 
@@ -1591,7 +1605,7 @@ noscript {
 }
 
 #selected-images-grid::after {
-  content: '';
+  content: "";
   flex: auto;
 }
 
@@ -1658,7 +1672,7 @@ noscript {
   cursor: pointer;
 }
 
-input[type=text] {
+input[type="text"] {
   padding: 4px 10px;
   font-size: 15px;
   border-radius: 3px;
@@ -1733,7 +1747,7 @@ input[type=text] {
 }
 
 #tooltip::after {
-  content: '';
+  content: "";
   position: absolute;
   top: -4px;
   width: 8px;
@@ -1816,7 +1830,7 @@ input[type=text] {
   * Range slider thumbs
   **/
 
-  input[type=range]::-webkit-slider-thumb {
+  input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: 1px solid #000000;
     height: 22px;
@@ -1829,7 +1843,7 @@ input[type=text] {
   }
 
   /* All the same stuff for Firefox */
-  input[type=range]::-moz-range-thumb {
+  input[type="range"]::-moz-range-thumb {
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     border: 1px solid #000000;
     height: 22px;
@@ -1840,7 +1854,7 @@ input[type=text] {
   }
 
   /* All the same stuff for IE */
-  input[type=range]::-ms-thumb {
+  input[type="range"]::-ms-thumb {
     box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
     border: 1px solid #000000;
     height: 22px;
@@ -1878,7 +1892,7 @@ input[type=text] {
   }
 
   #selected-images-modal .modal-bottom {
-    padding:  15px;
+    padding: 15px;
   }
   #selected-image-modal .modal-text-left {
     flex: 1;
@@ -1893,5 +1907,12 @@ input[type=text] {
     top: 12px;
     right: 26px;
   }
+}
 
+/**
+  * i-yeh
+  **/
+#layout-umap {
+  color: #fff;
+  cursor: pointer;
 }
