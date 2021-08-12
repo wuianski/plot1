@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang='en'>
-  <head>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
-    <link rel='stylesheet' type='text/css' href='assets/css/no-ui-slider.css'>
-    <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
-    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
-    <meta http-equiv='ScreenOrientation' content='autoRotate:disabled'>
-    <title>theMost | 最有趣</title>
-    <meta charset='UTF-8'/>
-    <meta name='author' content='i-yeh'>
+
+<head>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet'>
+  <link rel='stylesheet' type='text/css' href='assets/css/no-ui-slider.css'>
+  <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+  <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+  <meta http-equiv='ScreenOrientation' content='autoRotate:disabled'>
+  <title>theMost | 最有趣</title>
+  <meta charset='UTF-8' />
+  <meta name='author' content='i-yeh'>
   </head>
-  <body>
-    <!-- version: 0.0.109 -->
-    <script type='x-shader/x-vertex' id='vertex-shader'>
+
+<body>
+  <!-- version: 0.0.109 -->
+  <script type='x-shader/x-vertex' id='vertex-shader'>
     /**
     * The vertex shader's main() function must define `gl_Position`,
     * which describes the position of each vertex in screen coordinates.
@@ -109,7 +111,7 @@
     }
     </script>
 
-    <script type='x-shader/x-fragment' id='fragment-shader'>
+  <script type='x-shader/x-fragment' id='fragment-shader'>
     /**
     * The fragment shader's main() function must define `gl_FragColor`,
     * which describes the pixel color of each pixel on the screen.
@@ -229,8 +231,8 @@
     }
     </script>
 
-    <!-- Selection lasso -->
-    <script type='x-shader/x-vertex' id='dashed-vertex-shader'>
+  <!-- Selection lasso -->
+  <script type='x-shader/x-vertex' id='dashed-vertex-shader'>
     precision mediump float;
 
     uniform mat4 modelViewMatrix;
@@ -249,7 +251,7 @@
     }
     </script>
 
-    <script type='x-shader/x-fragment' id='dashed-fragment-shader'>
+  <script type='x-shader/x-fragment' id='dashed-fragment-shader'>
     precision mediump float;
 
     uniform vec3 cameraPosition;
@@ -267,8 +269,8 @@
     }
     </script>
 
-    <!-- Text sprites -->
-    <script type='x-shader/x-vertex' id='text-vertex-shader'>
+  <!-- Text sprites -->
+  <script type='x-shader/x-vertex' id='text-vertex-shader'>
     precision mediump float;
 
     uniform mat4 modelViewMatrix;
@@ -289,7 +291,7 @@
     }
     </script>
 
-    <script type='x-shader/x-fragment' id='text-fragment-shader'>
+  <script type='x-shader/x-fragment' id='text-fragment-shader'>
     precision mediump float;
 
     uniform sampler2D texture;
@@ -307,7 +309,7 @@
     }
     </script>
 
-    <script type='x-shader/x-vertex' id='line-vertex-shader'>
+  <script type='x-shader/x-vertex' id='line-vertex-shader'>
     precision highp float;
 
     uniform mat4 modelViewMatrix;
@@ -337,7 +339,7 @@
     }
     </script>
 
-    <script type='x-shader/x-fragment' id='line-fragment-shader'>
+  <script type='x-shader/x-fragment' id='line-fragment-shader'>
     precision highp float;
     uniform float display;
 
@@ -350,12 +352,12 @@
     }
     </script>
 
-    <!-- Header -->
-    <div id='header-container'>
-      <header id='header' class='no-highlight'></header>
-      <div id='header-brand'>
-        <div id='app-name'>fb-ad-library-keywords-最有趣</div>
-        <div class='tagline'>Image Fields in a Local Collection</div>
+  <!-- Header -->
+  <div id='header-container'>
+    <header id='header' class='no-highlight'></header>
+    <div id='header-brand'>
+      <div id='app-name'>#最有趣</div>
+      <div class='tagline'>Image Fields in a Local Collection</div>
       </div>
       <div id='header-controls'>
         <div id='header-controls-top' class='no-highlight'>
@@ -371,80 +373,82 @@
           <div id='filters-desktop'></div>
           <div id='icons'>
             <img class='layout-icon' id='layout-alphabetic' src='assets/images/icons/az-layout.svg' />
-            <img class='layout-icon' id='layout-umap' src='assets/images/icons/scatter-layout.svg' />
-            <img class='layout-icon' id='layout-grid' src='assets/images/icons/grid-layout.svg' />
-            <img class='layout-icon' id='layout-date' src='assets/images/icons/date-layout.svg' />
-            <img class='layout-icon' id='layout-categorical' src='assets/images/icons/categorical-layout.svg' />
-            <img class='layout-icon' id='layout-pose' src='assets/images/icons/pose-layout.svg' />
-            <img class='layout-icon' id='layout-geographic' src='assets/images/icons/geographic-layout.svg' />
-            <img id='settings-icon' src='assets/images/icons/gear-icon.svg' />
+          <div id='layout-umap'>zoom out</div>
+          <!--<img class='layout-icon' id='layout-umap' src='assets/images/icons/scatter-layout.svg' />-->
+          <img class='layout-icon' id='layout-grid' src='assets/images/icons/grid-layout.svg' />
+          <img class='layout-icon' id='layout-date' src='assets/images/icons/date-layout.svg' />
+          <img class='layout-icon' id='layout-categorical' src='assets/images/icons/categorical-layout.svg' />
+          <img class='layout-icon' id='layout-pose' src='assets/images/icons/pose-layout.svg' />
+          <img class='layout-icon' id='layout-geographic' src='assets/images/icons/geographic-layout.svg' />
+          <img id='settings-icon' src='assets/images/icons/gear-icon.svg' />
           </div>
-        </div>
-        <div id='header-controls-bottom' class='no-highlight'>
-          <div id='layout-select-container' class='mobile-only'>
-            <div class='settings-label'>Layout</div>
-            <select id='layout-select'></select>
           </div>
-          <div id='filters-mobile-wrap' class='mobile-only'>
-            <div id='filters-mobile-container'>
-              <div class='settings-label'>Category</div>
-              <div id='filters-mobile'></div>
+          <div id='header-controls-bottom' class='no-highlight'>
+            <div id='layout-select-container' class='mobile-only'>
+              <div class='settings-label'>Layout</div>
+              <select id='layout-select'></select>
+            </div>
+            <div id='filters-mobile-wrap' class='mobile-only'>
+              <div id='filters-mobile-container'>
+                <div class='settings-label'>Category</div>
+                <div id='filters-mobile'></div>
+              </div>
+            </div>
+            <div id='pose-display-container'>
+              <div class='settings-label'>Display</div>
+              <select id='pose-display-select'>
+                <option default value='images'>Images</option>
+                <option value='poses'>Poses</option>
+              </select>
+            </div>
+            <div class='range-slider' id='min-dist-range-input-container'>
+              <div class='settings-label'>Minimum Distance</div>
+              <input id='min-dist-range-input' min='0' max='2' step='1' value='1' type='range' />
+            </div>
+            <div class='range-slider' id='n-neighbors-range-input-container'>
+              <div class='settings-label'>Number of Neighbors</div>
+              <input id='n-neighbors-range-input' min='0' max='2' step='1' value='1' type='range' />
+            </div>
+            <div class='range-slider'>
+              <div class='settings-label'>Border Width</div>
+              <input id='border-width-range-input' min='0' max='1' value='0.15' step='0.01' type='range' />
+            </div>
+            <div class='range-slider'>
+              <div class='settings-label'>Point Size</div>
+              <input id='pointsize-range-input' min='0' max='0.03' value='0' step='0.00001' type='range' />
+            </div>
+            <div id='jitter-container'>
+              <div class='settings-label'>Jitter</div>
+              <input type='checkbox' id='jitter-input'>
             </div>
           </div>
-          <div id='pose-display-container'>
-            <div class='settings-label'>Display</div>
-            <select id='pose-display-select'>
-              <option default value='images'>Images</option>
-              <option value='poses'>Poses</option>
-            </select>
           </div>
-          <div class='range-slider' id='min-dist-range-input-container'>
-            <div class='settings-label'>Minimum Distance</div>
-            <input id='min-dist-range-input' min='0' max='2' step='1' value='1' type='range' />
           </div>
-          <div class='range-slider' id='n-neighbors-range-input-container'>
-            <div class='settings-label'>Number of Neighbors</div>
-            <input id='n-neighbors-range-input' min='0' max='2' step='1' value='1' type='range' />
-          </div>
-          <div class='range-slider'>
-            <div class='settings-label'>Border Width</div>
-            <input id='border-width-range-input' min='0' max='1' value='0.15' step='0.01' type='range' />
-          </div>
-          <div class='range-slider'>
-            <div class='settings-label'>Point Size</div>
-            <input id='pointsize-range-input' min='0' max='0.03' value='0' step='0.00001' type='range' />
-          </div>
-          <div id='jitter-container'>
-            <div class='settings-label'>Jitter</div>
-            <input type='checkbox' id='jitter-input'>
-          </div>
+          <div id='tooltip'></div>
+          <!-- Loader -->
+          <div id='loader-scene'>
+    <p class='welcome'>A collection of currently running image ads across Facebook and Instagram. Visualizing thousands
+      of
+      images in a two-dimensional projection which similar images are clustered together.</p>
+    <div class='loader-container'>
+      <div class='loader-icon'>
+        <div class='blocks'>
+          <div class='block'></div>
+          <div class='block'></div>
+          <div class='block'></div>
+          <div class='block'></div>
+          <div class='block'></div>
+          <div class='block'></div>
+          <div class='block'></div>
+          <div class='block'></div>
+          <div class='block'></div>
         </div>
+      </div>
+      <div id='loader-text'>
+        <span id='progress'>0%</span>
       </div>
     </div>
-    <div id='tooltip'></div>
-    <!-- Loader -->
-    <div id='loader-scene'>
-      <p class='welcome'>A collection of currently running image ads across Facebook and Instagram. Visualizing thousands of
-        images in a two-dimensional projection which similar images are clustered together.</p>
-      <div class='loader-container'>
-        <div class='loader-icon'>
-          <div class='blocks'>
-            <div class='block'></div>
-            <div class='block'></div>
-            <div class='block'></div>
-            <div class='block'></div>
-            <div class='block'></div>
-            <div class='block'></div>
-            <div class='block'></div>
-            <div class='block'></div>
-            <div class='block'></div>
-          </div>
-        </div>
-        <div id='loader-text'>
-          <span id='progress'>0%</span>
-        </div>
-      </div>
-      <button id='enter-button'>Enter</button>
+    <button id='enter-button'>Enter</button>
     </div>
     <!-- Canvas -->
     <div id='canvas-container'>
@@ -479,7 +483,7 @@
             </div>
           <% }); %>
         </script>
-      </div>
+    </div>
     </nav>
     <!-- Dismissible Tooltip: Hotspots -->
     <div class='dismissible-tooltip' id='hotspots-tooltip'>
@@ -554,30 +558,30 @@
         </div>
       </div>
     </script>
-    <div id='selected-image-modal'></div>
-    <!-- Image Selection: multi-image selection -->
-    <div id='selection-icons' class='no-highlight'>
-      <img id='pan' src='assets/images/icons/pan.svg' class='active' />
-      <img id='select' src='assets/images/icons/lasso.png' class='' />
-      <!-- Dismissible Tooltip: Lasso -->
-      <div class='dismissible-tooltip' id='select-tooltip'>
-        <b>Selection Mode</b>
-        <p>Lasso to select. Shift + drag to edit selection.</p>
-        <button id='select-tooltip-button'>Got it</button>
-      </div>
+  <div id='selected-image-modal'></div>
+  <!-- Image Selection: multi-image selection -->
+  <div id='selection-icons' class='no-highlight'>
+    <img id='pan' src='assets/images/icons/pan.svg' class='active' />
+    <img id='select' src='assets/images/icons/lasso.png' class='' />
+    <!-- Dismissible Tooltip: Lasso -->
+    <div class='dismissible-tooltip' id='select-tooltip'>
+      <b>Selection Mode</b>
+      <p>Lasso to select. Shift + drag to edit selection.</p>
+      <button id='select-tooltip-button'>Got it</button>
     </div>
-    <div id='view-selected-container'>
-      <div id='selected-images-count' class='no-highlight'>
-        <div id='selected-images-x'>✕</div>
-        <div id='count-target'>0</div>
-        <div>images selected</div>
-      </div>
-      <div id='view-selected' class='no-highlight button'>View Selected</div>
+  </div>
+  <div id='view-selected-container'>
+    <div id='selected-images-count' class='no-highlight'>
+      <div id='selected-images-x'>✕</div>
+      <div id='count-target'>0</div>
+      <div>images selected</div>
     </div>
-    <div id='selected-images-modal'>
-      <div class='modal-content'>
-        <div class='modal-top'>
-          <script type='text/html' id='selected-images-template'>
+    <div id='view-selected' class='no-highlight button'>View Selected</div>
+  </div>
+  <div id='selected-images-modal'>
+    <div class='modal-content'>
+      <div class='modal-top'>
+        <script type='text/html' id='selected-images-template'>
             <div class='modal-top-content'>
               <h2>Selected Images</h2>
               <p>You have selected <b id='n-images-selected'><%- images.length %></b> images</p>
@@ -591,13 +595,14 @@
               </div>
             </div>
           </script>
-          <div id='selected-images-target'></div>
+        <div id='selected-images-target'></div>
         </div>
         <div class='modal-bottom'>
           <div class='modal-bottom-content'>
             <div class='modal-text-left'>
               <b>Help Guide</b>
-              <p>Click an image above for higher resolution, or click the button to the right to download a JSON file identifying selected images.</p>
+            <p>Click an image above for higher resolution, or click the button to the right to download a JSON file
+              identifying selected images.</p>
             </div>
             <div class='modal-text-right'>
               <div class='row'>
@@ -613,16 +618,18 @@
                 <div class='filetype' id='zip'>ZIP</div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Webgl / Noscript Warnings -->
-    <div id='webgl-not-available'>
-      <div class='browser-message'>Sorry, your browser is not able to load a WebGL scene currently. Please check your browser settings and try again.</div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <!-- Webgl / Noscript Warnings -->
+            <div id='webgl-not-available'>
+    <div class='browser-message'>Sorry, your browser is not able to load a WebGL scene currently. Please check your
+      browser settings and try again.</div>
     </div>
     <noscript>
-      <span class='browser-message'>Sorry, your browser is not able to load a WebGL scene currently. Please enable JavaScript and try again.</span>
+    <span class='browser-message'>Sorry, your browser is not able to load a WebGL scene currently. Please enable
+      JavaScript and try again.</span>
     </noscript>
     <script src='assets/vendor/dist/three.min.js'></script>
     <script src='assets/vendor/dist/lodash.min.js'></script>
@@ -637,12 +644,14 @@
     <script src='assets/vendor/dist/d3.min.js'></script>
     <script src='assets/js/tsne.js'></script>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-101732875-1', 'auto');
-      ga('send', 'pageview');
+      {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTa]      async = 1; a.src = g; m.parentNode        tBefore(a, m)
+    })(window, document, 'script', 'https://www          analytics.com/analytics.js', 'ga');
+            eate', 'UA-101732875-1', 'auto');
+    ga('send', 'pa          ;
     </script>
   </body>
+
 </html>
