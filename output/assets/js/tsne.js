@@ -906,17 +906,17 @@ World.prototype.getScene = function() {
 *     clipping plane are culled from the scene
 **/
 
-World.prototype.getCamera = function() {
+World.prototype.getCamera = function () {
   var canvasSize = getCanvasSize();
-  var aspectRatio = canvasSize.w /canvasSize.h;
-  return new THREE.PerspectiveCamera(75, aspectRatio, 0.001, 10);
-}
+  var aspectRatio = canvasSize.w / canvasSize.h;
+  return new THREE.PerspectiveCamera(20, aspectRatio, 0.001, 100);
+};
 
 /**
-* Generate the renderer to be used in the scene
-**/
+ * Generate the renderer to be used in the scene
+ **/
 
-World.prototype.getRenderer = function() {
+World.prototype.getRenderer = function () {
   var renderer = new THREE.WebGLRenderer({
     antialias: true,
     canvas: this.canvas,
@@ -924,15 +924,15 @@ World.prototype.getRenderer = function() {
   renderer.autoClear = false;
   renderer.toneMapping = THREE.ReinhardToneMapping;
   return renderer;
-}
+};
 
 /**
-* Generate the controls to be used in the scene
-* @param {obj} camera: the three.js camera for the scene
-* @param {obj} renderer: the three.js renderer for the scene
-**/
+ * Generate the controls to be used in the scene
+ * @param {obj} camera: the three.js camera for the scene
+ * @param {obj} renderer: the three.js renderer for the scene
+ **/
 
-World.prototype.getControls = function() {
+World.prototype.getControls = function () {
   var controls = new THREE.TrackballControls(this.camera, this.canvas);
   controls.zoomSpeed = 0.4;
   controls.panSpeed = 0.4;
@@ -941,189 +941,213 @@ World.prototype.getControls = function() {
   controls.mouseButtons.MIDDLE = THREE.MOUSE.ZOOM;
   controls.mouseButtons.RIGHT = THREE.MOUSE.ROTATE;
   return controls;
-}
+};
 
 /**
-* Heightmap functions
-**/
+ * Heightmap functions
+ **/
 
 // load the heightmap
-World.prototype.getHeightMap = function(callback) {
+World.prototype.getHeightMap = function (callback) {
   // load an image for setting 3d vertex positions
   var img = new Image();
-  img.crossOrigin = 'Anonymous';
-  img.onload = function() {
-    var canvas = document.createElement('canvas'),
-        ctx = canvas.getContext('2d');
+  img.crossOrigin = "Anonymous";
+  img.onload = function () {
+    var canvas = document.createElement("canvas"),
+      ctx = canvas.getContext("2d");
     canvas.width = img.width;
     canvas.height = img.height;
     ctx.drawImage(img, 0, 0);
-    this.heightmap = ctx.getImageData(0,0, img.width, img.height);
+    this.heightmap = ctx.getImageData(0, 0, img.width, img.height);
     callback();
   }.bind(this);
-  img.src = this.heightmap || 'assets/images/heightmap.jpg';
-}
+  img.src = this.heightmap || "assets/images/heightmap.jpg";
+};
 
 // determine the height of the heightmap at coordinates x,y
-World.prototype.getHeightAt = function(x, y) {
-  var x = (x+1)/2, // rescale x,y axes from -1:1 to 0:1
-      y = (y+1)/2,
-      row = Math.floor(y * (this.heightmap.height-1)),
-      col = Math.floor(x * (this.heightmap.width-1)),
-      idx = (row * this.heightmap.width * 4) + (col * 4),
-      z = this.heightmap.data[idx] * (this.heightmapScalar/1000 || 0.0);
+World.prototype.getHeightAt = function (x, y) {
+  var x = (x + 1) / 2, // rescale x,y axes from -1:1 to 0:1
+    y = (y + 1) / 2,
+    row = Math.floor(y * (this.heightmap.height - 1)),
+    col = Math.floor(x * (this.heightmap.width - 1)),
+    idx = row * this.heightmap.width * 4 + col * 4,
+    z = this.heightmap.data[idx] * (this.heightmapScalar / 1000 || 0.0);
   return z;
-}
+};
 
 /**
-* Add event listeners, e.g. to resize canvas on window resize
-**/
+ * Add event listeners, e.g. to resize canvas on window resize
+ **/
 
-World.prototype.addEventListeners = function() {
+World.prototype.addEventListeners = function () {
   this.addResizeListener();
   this.addLostContextListener();
   this.addScalarChangeListener();
   this.addBorderWidthChangeListener();
   this.addTabChangeListeners();
   this.addModeChangeListeners();
-}
+};
 
 /**
-* Resize event listeners
-**/
+ * Resize event listeners
+ **/
 
-World.prototype.addResizeListener = function() {
-  window.addEventListener('resize', this.handleResize.bind(this), false);
-}
+World.prototype.addResizeListener = function () {
+  window.addEventListener("resize", this.handleResize.bind(this), false);
+};
 
-World.prototype.handleResize = function() {
+World.prototype.handleResize = function () {
   var canvasSize = getCanvasSize(),
-      w = canvasSize.w * window.devicePixelRatio,
-      h = canvasSize.h * window.devicePixelRatio;
+    w = canvasSize.w * window.devicePixelRatio,
+    h = canvasSize.h * window.devicePixelRatio;
   this.camera.aspect = w / h;
   this.camera.updateProjectionMatrix();
   this.renderer.setSize(w, h, false);
   this.controls.handleResize();
   picker.tex.setSize(w, h);
   this.setScaleUniforms();
-}
+};
 
-World.prototype.setScaleUniforms = function() {
-    // handle case of drag before scene renders
+World.prototype.setScaleUniforms = function () {
+  // handle case of drag before scene renders
   if (!this.state.displayed) return;
   var scale = world.getPointScale();
-  world.setUniform('scale', scale);
+  world.setUniform("scale", scale);
   if (lines.mesh) lines.mesh.material.uniforms.scale.value = scale;
-}
+};
 
 /**
-* Update the point size when the user changes the input slider
-**/
+ * Update the point size when the user changes the input slider
+ **/
 
-World.prototype.addScalarChangeListener = function() {
-  this.elems.pointSize.addEventListener('change', this.setScaleUniforms.bind(this));
-  this.elems.pointSize.addEventListener('input', this.setScaleUniforms.bind(this));
-}
-
-/**
-* Update the border width when users change the input slider
-**/
-
-World.prototype.addBorderWidthChangeListener = function() {
-  this.elems.borderWidth.addEventListener('change', this.setBorderWidthUniforms.bind(this));
-  this.elems.borderWidth.addEventListener('input', this.setBorderWidthUniforms.bind(this));
-}
-
-World.prototype.setBorderWidthUniforms = function(e) {
-  world.setUniform('borderWidth', parseFloat(e.target.value));
-}
+World.prototype.addScalarChangeListener = function () {
+  this.elems.pointSize.addEventListener(
+    "change",
+    this.setScaleUniforms.bind(this)
+  );
+  this.elems.pointSize.addEventListener(
+    "input",
+    this.setScaleUniforms.bind(this)
+  );
+};
 
 /**
-* Refrain from drawing scene when user isn't looking at page
-**/
+ * Update the border width when users change the input slider
+ **/
 
-World.prototype.addTabChangeListeners = function() {
+World.prototype.addBorderWidthChangeListener = function () {
+  this.elems.borderWidth.addEventListener(
+    "change",
+    this.setBorderWidthUniforms.bind(this)
+  );
+  this.elems.borderWidth.addEventListener(
+    "input",
+    this.setBorderWidthUniforms.bind(this)
+  );
+};
+
+World.prototype.setBorderWidthUniforms = function (e) {
+  world.setUniform("borderWidth", parseFloat(e.target.value));
+};
+
+/**
+ * Refrain from drawing scene when user isn't looking at page
+ **/
+
+World.prototype.addTabChangeListeners = function () {
   // change the canvas size to handle Chromium bug 1034019
-  window.addEventListener('visibilitychange', function() {
-    this.canvas.width = this.canvas.width + 1;
-    setTimeout(function() {
-      this.canvas.width = this.canvas.width - 1;
-    }.bind(this), 50);
-  }.bind(this))
-}
+  window.addEventListener(
+    "visibilitychange",
+    function () {
+      this.canvas.width = this.canvas.width + 1;
+      setTimeout(
+        function () {
+          this.canvas.width = this.canvas.width - 1;
+        }.bind(this),
+        50
+      );
+    }.bind(this)
+  );
+};
 
 /**
-* listen for loss of webgl context; to manually lose context:
-* world.renderer.context.getExtension('WEBGL_lose_context').loseContext();
-**/
+ * listen for loss of webgl context; to manually lose context:
+ * world.renderer.context.getExtension('WEBGL_lose_context').loseContext();
+ **/
 
-World.prototype.addLostContextListener = function() {
-  this.canvas.addEventListener('webglcontextlost', function(e) {
+World.prototype.addLostContextListener = function () {
+  this.canvas.addEventListener("webglcontextlost", function (e) {
     e.preventDefault();
     window.location.reload();
   });
-}
+};
 
 /**
-* Listen for changes in world.mode
-**/
+ * Listen for changes in world.mode
+ **/
 
-World.prototype.addModeChangeListeners = function() {
-  document.querySelector('#pan').addEventListener('click', this.handleModeIconClick.bind(this));
-  document.querySelector('#select').addEventListener('click', this.handleModeIconClick.bind(this));
-  document.querySelector('#select').addEventListener('mouseenter', this.showSelectTooltip.bind(this));
-}
+World.prototype.addModeChangeListeners = function () {
+  document
+    .querySelector("#pan")
+    .addEventListener("click", this.handleModeIconClick.bind(this));
+  document
+    .querySelector("#select")
+    .addEventListener("click", this.handleModeIconClick.bind(this));
+  document
+    .querySelector("#select")
+    .addEventListener("mouseenter", this.showSelectTooltip.bind(this));
+};
 
 /**
-* Set the center point of the scene
-**/
+ * Set the center point of the scene
+ **/
 
-World.prototype.setCenter = function() {
+World.prototype.setCenter = function () {
   this.center = {
     x: (data.boundingBox.x.min + data.boundingBox.x.max) / 2,
     y: (data.boundingBox.y.min + data.boundingBox.y.max) / 2,
-  }
-}
+  };
+};
 
 /**
-* Recenter the camera
-**/
+ * Recenter the camera
+ **/
 
 // return the camera to its starting position
-World.prototype.recenterCamera = function(enableDelay) {
+World.prototype.recenterCamera = function (enableDelay) {
   var initialCameraPosition = this.getInitialLocation();
-  if ((this.camera.position.z < initialCameraPosition.z) && enableDelay) {
+  if (this.camera.position.z < initialCameraPosition.z && enableDelay) {
     this.flyTo(initialCameraPosition);
     return config.transitions.duration * 1000;
   }
   return 0;
-}
+};
 
 /**
-* Draw each of the vertices
-**/
+ * Draw each of the vertices
+ **/
 
-World.prototype.plotPoints = function() {
+World.prototype.plotPoints = function () {
   // add the cells for each draw call
   var drawCallToCells = this.getDrawCallToCells();
   this.group = new THREE.Group();
   for (var drawCallIdx in drawCallToCells) {
     var meshCells = drawCallToCells[drawCallIdx],
-        attrs = this.getGroupAttributes(meshCells),
-        geometry = new THREE.InstancedBufferGeometry();
-    geometry.setIndex([0,1,2, 2,3,0]);
-    geometry.setAttribute('position', attrs.position);
-    geometry.setAttribute('uv', attrs.uv);
-    geometry.setAttribute('translation', attrs.translation);
-    geometry.setAttribute('targetTranslation', attrs.targetTranslation);
-    geometry.setAttribute('color', attrs.color);
-    geometry.setAttribute('width', attrs.width);
-    geometry.setAttribute('height', attrs.height);
-    geometry.setAttribute('offset', attrs.offset);
-    geometry.setAttribute('opacity', attrs.opacity);
-    geometry.setAttribute('selected', attrs.selected);
-    geometry.setAttribute('clusterSelected', attrs.clusterSelected);
-    geometry.setAttribute('textureIndex', attrs.textureIndex);
+      attrs = this.getGroupAttributes(meshCells),
+      geometry = new THREE.InstancedBufferGeometry();
+    geometry.setIndex([0, 1, 2, 2, 3, 0]);
+    geometry.setAttribute("position", attrs.position);
+    geometry.setAttribute("uv", attrs.uv);
+    geometry.setAttribute("translation", attrs.translation);
+    geometry.setAttribute("targetTranslation", attrs.targetTranslation);
+    geometry.setAttribute("color", attrs.color);
+    geometry.setAttribute("width", attrs.width);
+    geometry.setAttribute("height", attrs.height);
+    geometry.setAttribute("offset", attrs.offset);
+    geometry.setAttribute("opacity", attrs.opacity);
+    geometry.setAttribute("selected", attrs.selected);
+    geometry.setAttribute("clusterSelected", attrs.clusterSelected);
+    geometry.setAttribute("textureIndex", attrs.textureIndex);
     geometry.setDrawRange(0, meshCells.length); // points not rendered unless draw range is specified
     var material = this.getShaderMaterial({
       firstTex: attrs.texStartIdx,
@@ -1136,30 +1160,30 @@ World.prototype.plotPoints = function() {
     this.group.add(mesh);
   }
   this.scene.add(this.group);
-}
+};
 
 /**
-* Find the index of each cell's draw call
-**/
+ * Find the index of each cell's draw call
+ **/
 
-World.prototype.getDrawCallToCells = function() {
+World.prototype.getDrawCallToCells = function () {
   var drawCallToCells = {};
-  for (var i=0; i<data.cells.length; i++) {
+  for (var i = 0; i < data.cells.length; i++) {
     var cell = data.cells[i],
-        drawCall = cell.getIndexOfDrawCall();
+      drawCall = cell.getIndexOfDrawCall();
     if (!(drawCall in drawCallToCells)) drawCallToCells[drawCall] = [cell];
     else drawCallToCells[drawCall].push(cell);
   }
   return drawCallToCells;
-}
+};
 
 /**
-* Return attribute data for the initial draw call of a mesh
-**/
+ * Return attribute data for the initial draw call of a mesh
+ **/
 
-World.prototype.getGroupAttributes = function(cells) {
+World.prototype.getGroupAttributes = function (cells) {
   var it = this.getCellIterators(cells.length);
-  for (var i=0; i<cells.length; i++) {
+  for (var i = 0; i < cells.length; i++) {
     var cell = cells[i];
     var rgb = this.color.setHex(cells[i].idx + 1); // use 1-based ids for colors
     it.texIndex[it.texIndexIterator++] = cell.texIdx; // index of texture among all textures -1 means LOD texture
@@ -1181,33 +1205,38 @@ World.prototype.getGroupAttributes = function(cells) {
     it.offset[it.offsetIterator++] = cell.dy; // px offset of cell from top of tex
   }
 
-  var positions = new Float32Array([
-    0, 0, 0,
-    1, 0, 0,
-    1, 1, 0,
-    0, 1, 0,
-  ])
+  var positions = new Float32Array([0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0]);
 
-  var uvs = new Float32Array([
-    0.0, 0.0,
-    1.0, 0.0,
-    1.0, 1.0,
-    0.0, 1.0,
-  ])
+  var uvs = new Float32Array([0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0]);
 
   // format the arrays into THREE attributes
   var position = new THREE.BufferAttribute(positions, 3, true, 1),
-      uv = new THREE.BufferAttribute(uvs, 2, true, 1),
-      translation = new THREE.InstancedBufferAttribute(it.translation, 3, true, 1),
-      targetTranslation = new THREE.InstancedBufferAttribute(it.targetTranslation, 3, true, 1),
-      color = new THREE.InstancedBufferAttribute(it.color, 3, true, 1),
-      opacity = new THREE.InstancedBufferAttribute(it.opacity, 1, true, 1),
-      selected = new THREE.InstancedBufferAttribute(it.selected, 1, false, 1),
-      clusterSelected = new THREE.InstancedBufferAttribute(it.clusterSelected, 1, false, 1),
-      texIndex = new THREE.InstancedBufferAttribute(it.texIndex, 1, false, 1),
-      width = new THREE.InstancedBufferAttribute(it.width, 1, false, 1),
-      height = new THREE.InstancedBufferAttribute(it.height, 1, false, 1),
-      offset = new THREE.InstancedBufferAttribute(it.offset, 2, false, 1);
+    uv = new THREE.BufferAttribute(uvs, 2, true, 1),
+    translation = new THREE.InstancedBufferAttribute(
+      it.translation,
+      3,
+      true,
+      1
+    ),
+    targetTranslation = new THREE.InstancedBufferAttribute(
+      it.targetTranslation,
+      3,
+      true,
+      1
+    ),
+    color = new THREE.InstancedBufferAttribute(it.color, 3, true, 1),
+    opacity = new THREE.InstancedBufferAttribute(it.opacity, 1, true, 1),
+    selected = new THREE.InstancedBufferAttribute(it.selected, 1, false, 1),
+    clusterSelected = new THREE.InstancedBufferAttribute(
+      it.clusterSelected,
+      1,
+      false,
+      1
+    ),
+    texIndex = new THREE.InstancedBufferAttribute(it.texIndex, 1, false, 1),
+    width = new THREE.InstancedBufferAttribute(it.width, 1, false, 1),
+    height = new THREE.InstancedBufferAttribute(it.height, 1, false, 1),
+    offset = new THREE.InstancedBufferAttribute(it.offset, 2, false, 1);
   texIndex.usage = THREE.DynamicDrawUsage;
   translation.usage = THREE.DynamicDrawUsage;
   targetTranslation.usage = THREE.DynamicDrawUsage;
@@ -1234,9 +1263,9 @@ World.prototype.getGroupAttributes = function(cells) {
       endIdx: texIndices.last,
     }),
     texStartIdx: texIndices.first,
-    texEndIdx: texIndices.last
-  }
-}
+    texEndIdx: texIndices.last,
+  };
+};
 
 /**
 * Get the iterators required to store attribute data for `n` cells
@@ -1619,6 +1648,7 @@ World.prototype.init = function() {
   var loc = this.getInitialLocation();
   this.camera.position.set(loc.x, loc.y, loc.z);
   this.camera.lookAt(loc.x, loc.y, loc.z);
+  this.camera.zoom = 1.0;
   // draw points and start the render loop
   this.plotPoints();
   // draw lines
